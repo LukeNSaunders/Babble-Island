@@ -1,16 +1,15 @@
-
 import Phaser from "phaser";
 import { useEffect, useState } from "react";
 import DialogueBox from "./components/ReactComponents/DialogueBox";
 import Frame from "./components/ReactComponents/Frame";
 import Preloader from "./components/scenes/preloader";
 import MiniGame1 from "./components/scenes/MiniGame1";
-import MiniGame1Content from "./components/ReactComponents/MiniGame1Content"
+import MiniGame1Content from "./components/ReactComponents/MiniGame1Content";
 import MiniGame2 from "./components/scenes/MiniGame2";
 import Map from "./components/scenes/Map";
 import { useNavigate } from "react-router-dom";
-import { refreshUser,updateStars  } from "./ApiClient";
-import ChatGPT from "./components/ReactComponents/Library/ChatGPT.js"
+import { refreshUser, updateStars } from "./ApiClient";
+import ChatGPT from "./components/ReactComponents/Library/ChatGPT.js";
 
 function Game({ user, setUser, characterList }) {
   const [message, setMessage] = useState();
@@ -20,7 +19,7 @@ function Game({ user, setUser, characterList }) {
 
   const navigate = useNavigate();
 
-  console.log(characterList)
+  console.log(characterList);
 
   useEffect(() => {
     console.log("in the useEffect");
@@ -42,15 +41,14 @@ function Game({ user, setUser, characterList }) {
       },
     });
 
-   refreshUser().then((data) => {
+    refreshUser().then((data) => {
       if (data) {
         setUser(data);
       }
     });
-    ;
   }, []);
 
-  console.log(user)
+  console.log(user);
   const addOneStar = async (id) => {
     try {
       const star = await updateStars(id);
@@ -75,21 +73,21 @@ function Game({ user, setUser, characterList }) {
       case "character3":
         setMessage(characterList[2]);
         break;
-        case "sign1":
+      case "sign1":
         setMessage(characterList[5]);
         break;
-        case "sign2":
+      case "sign2":
         setMessage(characterList[6]);
         break;
-        case "sign3":
+      case "sign3":
         setMessage(characterList[7]);
         break;
-        case "sign4":
+      case "sign4":
         setMessage(characterList[8]);
         break;
     }
 
-   console.log(character)
+    console.log(character);
   };
   window.addEventListener("react", reactCharacterListener);
 
@@ -107,20 +105,19 @@ function Game({ user, setUser, characterList }) {
     const reactCollectStarsListener = () => {
       if (!isEventTriggered) {
         setIsEventTriggered(true);
-        console.log('I AM IN THE LISTENER');
-        setUser(prevUser => ({ ...prevUser, stars: prevUser.stars + 1 }));
+        console.log("I AM IN THE LISTENER");
+        setUser((prevUser) => ({ ...prevUser, stars: prevUser.stars + 1 }));
         addOneStar(user._id);
         setTimeout(() => {
           setIsEventTriggered(false);
         }, 1000);
       }
     };
-    window.addEventListener('starCollected', reactCollectStarsListener);
+    window.addEventListener("starCollected", reactCollectStarsListener);
     return () => {
-      window.removeEventListener('starCollected', reactCollectStarsListener);
+      window.removeEventListener("starCollected", reactCollectStarsListener);
     };
-    }, [user, isEventTriggered])
-
+  }, [user, isEventTriggered]);
 
   const navigateToLibrary = () => {
     navigate("/library");
@@ -128,8 +125,8 @@ function Game({ user, setUser, characterList }) {
   window.addEventListener("library", navigateToLibrary);
 
   const navigateToMiniGame1 = () => {
-    navigate('/miniGame1')
-  }
+    navigate("/miniGame1");
+  };
   window.addEventListener("miniGame1", navigateToMiniGame1);
 
   return (

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { defineWord, translateWord } from '../../ApiClient.js';
-import TranslationBox from './TranslationBox.js';
-import './library.css';
+import React, { useState } from "react";
+import { defineWord, translateWord } from "../../../ApiClient.js";
+import TranslationBox from "./TranslationBox.js";
+import "./library.css";
 
 function Words({ word }) {
   const [displayTranslation, seDisplayTranslation] = useState(false);
-  const [translatedWord, setTranslatedWord] = useState('');
+  const [translatedWord, setTranslatedWord] = useState("");
   const [definition, setDefinition] = useState();
 
   async function translate() {
@@ -18,11 +18,11 @@ function Words({ word }) {
 
   return (
     <div>
-      <div className='individual-word' onClick={translate}>
+      <div className="individual-word" onClick={translate}>
         <p> {word.word} </p>
       </div>
       {displayTranslation && (
-        <div className='translation-box'>
+        <div className="translation-box">
           <TranslationBox
             translation={translatedWord}
             definition={definition}

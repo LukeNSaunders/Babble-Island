@@ -1,4 +1,3 @@
-
 const Character = require("../Models/CharacterSchema");
 
 exports.getCharacter = async (req, res) => {
@@ -14,14 +13,14 @@ exports.getCharacter = async (req, res) => {
   }
 };
 
-exports.getAllCharacters = async (req,res) => {
+exports.getAllCharacters = async (req, res) => {
   try {
-    const characters = await Character.find()
-    res.send(characters )
+    const characters = await Character.find();
+    res.send(characters);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
 exports.createCharacter = async (req, res) => {
   try {
@@ -34,11 +33,15 @@ exports.createCharacter = async (req, res) => {
   }
 };
 
-exports.updateCharacter = async (req,res) =>{
+exports.updateCharacter = async (req, res) => {
   try {
-    const newCharacter = await Character.findOneAndUpdate({_id:req.body.id,},req.updates)
-    res.send(newCharacter)
+    const newCharacter = await Character.findOneAndUpdate(
+      { _id: req.body.id },
+      req.updates
+    );
+    res.send(newCharacter);
   } catch (error) {
-    console.log(error)
-    res.sendStatus(401)
-  }}
+    console.log(error);
+    res.sendStatus(401);
+  }
+};

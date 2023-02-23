@@ -32,7 +32,7 @@ exports.login = async (req, res) => {
     const valid = await bcrypt.compare(req.body.password, user.password);
     if (valid) {
       req.session.uid = user._id;
-      console.log(req.session.uid, 'inside login')
+      console.log(req.session.uid, "inside login");
       res.send(user);
     }
   } catch (error) {
@@ -46,7 +46,9 @@ exports.login = async (req, res) => {
 exports.logout = async (req, res) => {
   req.session.destroy((error) => {
     if (error) {
-      res.status(500).send({error :error, message: "Could not log out please try again"});
+      res
+        .status(500)
+        .send({ error: error, message: "Could not log out please try again" });
     } else {
       res.clearCookie("sid");
       console.log("cookie cleared");
@@ -55,18 +57,18 @@ exports.logout = async (req, res) => {
   });
 };
 
-exports.refreshUser = async (req , res) =>{
+exports.refreshUser = async (req, res) => {
   try {
-    console.log(req.session)
-    console.log(req.session.uid)
-    const user = await User.findById(req.session.uid)
-    console.log(user)
-    res.send(user)
+    console.log(req.session);
+    console.log(req.session.uid);
+    const user = await User.findById(req.session.uid);
+    console.log(user);
+    res.send(user);
   } catch (error) {
-    console.log(error)
-    res.sendStatus(404)
+    console.log(error);
+    res.sendStatus(404);
   }
-}
+};
 
 exports.getUsers = async (req, res) => {
   try {

@@ -1,12 +1,12 @@
-import React from 'react';
-import { login } from '../ApiClient.js';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import './Login.css';
+import React from "react";
+import { login } from "../../ApiClient.js";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import "./Login.css";
 
 const initialState = {
-  userName: '',
-  password: '',
+  userName: "",
+  password: "",
 };
 
 function Login(props) {
@@ -21,7 +21,7 @@ function Login(props) {
     }));
   };
   const moveToRegister = () => {
-    navigate('/register');
+    navigate("/register");
   };
 
   const handleSubmit = async (e) => {
@@ -35,7 +35,7 @@ function Login(props) {
       setState(initialState);
     } else {
       props.setUser(res);
-      navigate('/landing');
+      navigate("/landing");
     }
   };
 
@@ -44,40 +44,40 @@ function Login(props) {
   };
 
   return (
-    <div className='babble-island'>
-      <section className='login'>
-        <h1 className='title'>Babble Island</h1>
+    <div className="babble-island">
+      <section className="login">
+        <h1 className="title">Babble Island</h1>
 
         <br></br>
 
         <h2>Login</h2>
-        <form className='form' onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmit}>
           <input
-            type='text'
-            placeholder='User Name'
-            name='userName'
+            type="text"
+            placeholder="User Name"
+            name="userName"
             value={state.userName}
             onChange={handleChange}
           />
           <br></br>
           <input
-            type='password'
-            placeholder='Password'
-            name='password'
+            type="password"
+            placeholder="Password"
+            name="password"
             value={state.password}
             onChange={handleChange}
           />
           <br></br>
           <button
-            className='form-submit'
-            type='submit'
+            className="form-submit"
+            type="submit"
             disabled={validateForm()}
           >
             &nbsp;Login&nbsp;
           </button>
         </form>
         <p>Don't have an account? Register here</p>
-        <button className='form-submit' onClick={moveToRegister}>
+        <button className="form-submit" onClick={moveToRegister}>
           Register
         </button>
       </section>

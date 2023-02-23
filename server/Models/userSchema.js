@@ -19,16 +19,15 @@ const userSchema = new Schema({
   languages: {
     type: [{ type: Schema.Types.ObjectId, ref: "Languages" }],
   },
-  level:{
+  level: {
     type: Number,
-    default: 0
+    default: 0,
   },
   stars: {
-    type: Number, 
+    type: Number,
     required: true,
-    default:0
-  }
-
+    default: 0,
+  },
 });
 
 const User = mongoose.model("Users", userSchema);

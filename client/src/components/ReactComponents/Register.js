@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { register } from '../ApiClient.js';
-import './Register.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { register } from "../../ApiClient.js";
+import "./Register.css";
 
 const initialState = {
-  userName: '',
-  password: '',
-  nickName: '',
+  userName: "",
+  password: "",
+  nickName: "",
 };
 
 const Register = (props) => {
@@ -34,12 +34,12 @@ const Register = (props) => {
       setExists(true);
     } else {
       props.setUser(res);
-      navigate('/landing');
+      navigate("/landing");
     }
   };
 
   const loginHandle = () => {
-    navigate('/');
+    navigate("/");
   };
 
   const validateForm = () => {
@@ -47,34 +47,34 @@ const Register = (props) => {
   };
 
   return (
-    <div className='babble-island'>
-      <section className='register'>
-        <h1 className='title'>Babble Island</h1>
+    <div className="babble-island">
+      <section className="register">
+        <h1 className="title">Babble Island</h1>
 
         <br></br>
 
         <h2>Register</h2>
-        <form className='form' onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmit}>
           <input
-            type='text'
-            placeholder='User Name'
-            name='userName'
+            type="text"
+            placeholder="User Name"
+            name="userName"
             value={state.userName}
             onChange={handleChange}
           />
           <br></br>
           <input
-            type='password'
-            placeholder='Password'
-            name='password'
+            type="password"
+            placeholder="Password"
+            name="password"
             value={state.password}
             onChange={handleChange}
           />
           <br></br>
           <input
-            type='text'
-            placeholder='Nick Name'
-            name='nickName'
+            type="text"
+            placeholder="Nick Name"
+            name="nickName"
             value={state.nickName}
             onChange={handleChange}
           />
@@ -82,18 +82,18 @@ const Register = (props) => {
 
           <br></br>
           <button
-            className='form-submit'
-            type='submit'
+            className="form-submit"
+            type="submit"
             disabled={validateForm()}
           >
             &nbsp;Register&nbsp;
           </button>
         </form>
         <br></br>
-        {exists ? <p> User already exists. Please login</p> : 'Already a user?'}
+        {exists ? <p> User already exists. Please login</p> : "Already a user?"}
         <br></br>
         <br></br>
-        <button onClick={loginHandle} className='form-submit'>
+        <button onClick={loginHandle} className="form-submit">
           Login
         </button>
       </section>

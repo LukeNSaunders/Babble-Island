@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-function TranslationBox({ translation}) {
+function TranslationBox({ translation }) {
   return (
     <div>
       <p>{translation}</p>

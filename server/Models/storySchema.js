@@ -16,12 +16,11 @@ const storySchema = new Schema({
     required: false,
   },
 
-  level:{
+  level: {
     type: Number,
     required: false,
-    default: 0
-  }
-
+    default: 0,
+  },
 });
 
 const Story = mongoose.model("Stories", storySchema);

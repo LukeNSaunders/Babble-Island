@@ -107,14 +107,23 @@ class MiniGame2 extends Phaser.Scene {
 
     this.doorSprite.body.immovable = true;
 
-
     const walls = this.physics.add.staticGroup();
 
-        walls.create(this.scale.width/1.75 , 0, 'longWall').setScale(this.scale.width /150,2);
-        walls.create(0, 0, 'longVerticalWall').setScale(4,this.scale.width).refreshBody();
-        walls.create(0, this.scale.height, 'longWall').setScale(this.scale.width,2).refreshBody();
-        walls.create(this.scale.width, 0, 'longVerticalWall').setScale(4,this.scale.width).refreshBody();
-
+    walls
+      .create(this.scale.width / 1.75, 0, "longWall")
+      .setScale(this.scale.width / 150, 2);
+    walls
+      .create(0, 0, "longVerticalWall")
+      .setScale(4, this.scale.width)
+      .refreshBody();
+    walls
+      .create(0, this.scale.height, "longWall")
+      .setScale(this.scale.width, 2)
+      .refreshBody();
+    walls
+      .create(this.scale.width, 0, "longVerticalWall")
+      .setScale(4, this.scale.width)
+      .refreshBody();
 
     // this.door = this.physics.add.sprite(width / 2, 100, 'bomb');
 
@@ -392,7 +401,7 @@ class MiniGame2 extends Phaser.Scene {
       this.generateChest(this.scale.width / 2, this.scale.height / 2);
 
       this.chestFound.play();
-      this.doorSprite.anims.play('openDoors')
+      this.doorSprite.anims.play("openDoors");
     }
   }
   updateActiveBox() {

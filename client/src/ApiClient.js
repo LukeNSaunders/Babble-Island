@@ -1,30 +1,15 @@
-const baseUrl = 'http://localhost:4000';
-// const texToSpeech = require('@google-cloud/text-to-speech')
-// const fs = require('fs')
-// const util = require('util')
-// const client = new textToSpeech.TextToSpeechClient()
-// const text = 'hello world'
-// const outputFile = './'
+const baseUrl = "http://localhost:4000";
 
-
-// const request = {
-//   input:{text: text},
-//   voice:{languageCode: 'en-US', ssmlGender: 'FEMALE'},
-//   audioConfig: {audioEncoding: 'MP3'},
-// };
-// export async function reader(){
-// const [response]= await client.synthesizeZpeech(request)
-// const writeFile= util.promisify(fs.writeFile);
-// await writeFile(outputFile, response.audioContent, 'binary')
-// console.log('Audio content written to file')}
-// // FOR LOGIN
+// FOR LOGIN
 
 export const login = async (user) => {
   try {
     const response = await fetch(`${baseUrl}/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),
+      credentials: "include",
+      mode: "cors",
     });
     const loggedUser = await response.json();
 
@@ -36,10 +21,10 @@ export const login = async (user) => {
 
 export const register = async (user) => {
   try {
-    console.log('help Im stuck in the api service');
+    console.log("help Im stuck in the api service");
     const response = await fetch(`${baseUrl}/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),
     });
     const data = await response.json();
@@ -53,12 +38,12 @@ export const register = async (user) => {
 export const logout = async () => {
   try {
     const response = await fetch(`${baseUrl}/logout`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(),
-      credentials: 'include',
+      credentials: "include",
     });
-    const data = await response.json();
+    const data = await response.json;
     return data;
   } catch (error) {
     console.log(error);
@@ -79,8 +64,8 @@ export const fetchCharacters = async () => {
 export const startDialogue = async (character) => {
   try {
     const response = await fetch(`${baseUrl}/character`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ character: character }),
     });
     return response.json();
@@ -93,9 +78,9 @@ export const startDialogue = async (character) => {
 export const createDialogue = async (dialogue) => {
   try {
     const res = await fetch(`${baseUrl}`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(dialogue),
     });
@@ -118,8 +103,8 @@ export const fetchUserStars = async () => {
 export const updateStars = async (id) => {
   try {
     const response = await fetch(`${baseUrl}/user/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: id }),
     });
     return response.json();
@@ -134,10 +119,9 @@ export const translateWord = async (word) => {
     const response = await fetch(
       `https://translation.googleapis.com/language/translate/v2?q=${word}&target=en&source=es&format=text&key=AIzaSyD56Mw8C84FywZbeclWpYNzjNopb1rjqgc`,
       {
-        method: 'POST',
+        method: "POST",
       }
     );
-
     return response.json();
   } catch (error) {
     console.log(error);
@@ -149,19 +133,20 @@ export const defineWord = async (word) => {
     const response = await fetch(
       `https://api.dictionaryapi.dev/api/v2/entries/es/${word}`,
       {
-        method: 'GET',
+        method: "GET",
       }
     );
     return response.json();
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export const getBookCollection = async () => {
+export const getBooks = async () => {
   try {
-    console.log('Im in get book');
     const response = await fetch(`${baseUrl}/stories`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
     });
     return response.json();
   } catch (error) {
@@ -169,38 +154,24 @@ export const getBookCollection = async () => {
   }
 };
 
-export const textToSpeech = async (text) => {
+export const storyReader = async (story) => {
   try {
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer AIzaSyD56Mw8C84FywZbeclWpYNzjNopb1rjqgc`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        input: { text: text },
-        voice: { languageCode: 'es-ES', ssmlGender: 'FEMALE' },
-        audioConfig: { audioEncoding: 'MP3' },
-      }),
-    };
+    const response = await fetch(`${baseUrl}/read`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: story.story, title: story.title }),
+    });
 
-    const response = await fetch(
-      'https://texttospeech.googleapis.com/v1/text:synthesize',
-      requestOptions
-    );
-    const { audioContent } = await response.json();
-
-    const audioElement = new Audio(`data:audio/mp3;base64,${audioContent}`);
-    audioElement.play();
+    return response.json();
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 };
 
 export const refreshUser = async () => {
   try {
     const response = await fetch(`${baseUrl}/refresh`, {
-      credentials: 'include',
+      credentials: "include",
     });
     return response.json();
   } catch (error) {

@@ -11,13 +11,13 @@ const characterSchema = new Schema({
     type: String,
     required: true,
   },
-  responseGood:{
+  responseGood: {
     type: String,
-    required: false
+    required: false,
   },
-  responseBad:{
-    type:String,
-    required: false
+  responseBad: {
+    type: String,
+    required: false,
   },
   good: {
     type: Array,
@@ -26,9 +26,8 @@ const characterSchema = new Schema({
 
   bad: {
     type: Array,
-    required:false
+    required: false,
   },
-  
 });
 
 const Character = mongoose.model("Characters", characterSchema);
