@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import { useEffect, useState } from "react";
 import DialogueBox from "./components/ReactComponents/DialogueBox";
 import Frame from "./components/ReactComponents/Frame";
-import Preloader from "./components/scenes/preloader";
+import Preloader from "./components/scenes/Preloader.ts";
 import MiniGame1 from "./components/scenes/MiniGame1";
 import MiniGame1Content from "./components/ReactComponents/MiniGame1Content";
 import MiniGame2 from "./components/scenes/MiniGame2";
