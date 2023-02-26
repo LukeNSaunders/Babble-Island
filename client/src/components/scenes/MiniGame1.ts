@@ -1,34 +1,34 @@
 import Phaser from 'phaser';
 
 class MiniGame1 extends Phaser.Scene {
-  private activeChest: Phaser.Physics.Arcade.Sprite;
-  private cursors: Phaser.Types.Input.Keyboard.CursorKeys;
-  private music: Phaser.Sound.BaseSound;
-  private pear: Phaser.Sound.BaseSound;
-  private orange: Phaser.Sound.BaseSound;
-  private apple: Phaser.Sound.BaseSound;
-  private grape: Phaser.Sound.BaseSound;
-  private strawberry: Phaser.Sound.BaseSound;
-  private openChest: Phaser.Sound.BaseSound;
-  private collectFruit: Phaser.Sound.BaseSound;
-  private chestFound: Phaser.Sound.BaseSound;
-  private checkBox: Phaser.Sound.BaseSound;
-  private doorSprite: Phaser.Physics.Arcade.Sprite;
-  private player: Phaser.Physics.Arcade.Sprite;
-  private chestSprite: Phaser.Physics.Arcade.Sprite;
+  private activeChest!: Phaser.Physics.Arcade.Sprite;
+  private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
+  private music!: Phaser.Sound.BaseSound;
+  private pear!: Phaser.Sound.BaseSound;
+  private orange!: Phaser.Sound.BaseSound;
+  private apple!: Phaser.Sound.BaseSound;
+  private grape!: Phaser.Sound.BaseSound;
+  private strawberry!: Phaser.Sound.BaseSound;
+  private openChest!: Phaser.Sound.BaseSound;
+  private collectFruit!: Phaser.Sound.BaseSound;
+  private chestFound!: Phaser.Sound.BaseSound;
+  private checkBox!: Phaser.Sound.BaseSound;
+  private doorSprite!: Phaser.Physics.Arcade.Sprite;
+  private player!: Phaser.Physics.Arcade.Sprite;
+  private chestSprite!: Phaser.Physics.Arcade.Sprite;
 
   constructor() {
     super({
-      key: 'MiniGame1TS',
+      key: 'MiniGame1',
     });
   }
 
-  init() {
+  init() : void {
     this.game.scale.setZoom(2.04);
     this.cursors = this.input.keyboard.createCursorKeys();
   }
 
-  create() {
+  create(): void {
     // FADE IN SCENE
 
     this.cameras.main.fadeIn(1000, 0, 0, 0);
@@ -65,12 +65,12 @@ class MiniGame1 extends Phaser.Scene {
     // first id is the name on the JSON, second id refers the id used for the image
 
     const tileset = map.addTilesetImage('Wooden_House', 'mini_game_1');
-    const tileset2 = map.addTilesetImage('doors', 'doors');
+    // const tileset2 = map.addTilesetImage('doors', 'doors');
 
     // create layers ie ground or walls
+    
     const ground = map.createLayer('ground', tileset);
     const walls = map.createLayer('walls', tileset);
-    // const doors = map.createLayer('doors', tileset2);
     const fruitsLayer = map.getObjectLayer('all_fruits')['objects'];
 
     // set collisions
@@ -222,7 +222,6 @@ class MiniGame1 extends Phaser.Scene {
           this.chestSprite.anims.play('openChest', true);
           const star = this.add.sprite(350, 180, 'star');
           star.scale = 0;
-          // star.alpha = 0
           this.tweens.add({
             targets: star,
             y: '-= 20',
@@ -299,7 +298,6 @@ class MiniGame1 extends Phaser.Scene {
         this.chestFound.play();
         this.doorSprite.anims.play('openDoors');
       }
-      console.log(fruitsRemaining);
     }
 
     // character animations
