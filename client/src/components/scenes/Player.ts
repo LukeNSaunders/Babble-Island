@@ -1,9 +1,10 @@
-// @ts-nocheck
 
 import Phaser from "phaser";
 
 class Player extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y, texture) {
+  private cursors: Phaser.Types.Input.Keyboard.CursorKeys;
+
+  constructor(scene: Phaser.Scene, x: number, y: number, texture: string) {
     super(scene, x, y, texture);
     scene.physics.world.enableBody(this);
     scene.add.existing(this);
@@ -11,7 +12,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.cursors = scene.input.keyboard.createCursorKeys();
   }
 
-  updatePlayer() {
+  updatePlayer() : void {
     if (this.cursors.left.isDown) {
       this.setVelocity(-160, 0);
 

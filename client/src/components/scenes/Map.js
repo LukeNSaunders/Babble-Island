@@ -1,6 +1,6 @@
 // @ts-nocheck
 import Phaser from "phaser";
-import Player from "./Player.js";
+import Player from "./Player.ts";
 
 class Map extends Phaser.Scene {
   /** @type {Phaser.Physics.Arcade.Sprite} */
