@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import React, { useEffect, useState } from "react";
 import "./Frame.css";
 import HeartImg from "../../pixel/heart.png";
@@ -8,21 +6,27 @@ import SmallMap from "../../pixel/bbislandMap2.png";
 import mapIcon from "../../pixel/mapIcon.png";
 import x from "../../pixel/x.png";
 import menuIcon from "../../pixel/menuIcon.png";
-import settings from "../../pixel/settings.png";
 import quit from "../../pixel/quit.png";
 import { useNavigate } from "react-router-dom";
-// import HeartImg from '../../../public/assets/pixel/heart';
 import { logout } from "../../ApiClient.js";
-function Frame({ user, setUser }) {
-  const [stars, setStars] = useState([]);
-  const [hearts, setHearts] = useState([1, 2]);
-  const [popupActive, setPopupActive] = useState(false);
-  const [menuActive, setMenuActive] = useState(false);
+
+type FrameProps = {
+  user: {
+    stars: number
+  }
+  setUser: React.Dispatch<React.SetStateAction<{ stars: number }>>
+}
+
+export default function Frame({ user, setUser } : FrameProps) : JSX.Element {
+  const [stars, setStars] = useState< number[]>([]);
+  const [hearts, setHearts] = useState <number []>([1, 2]);
+  const [popupActive, setPopupActive] = useState<boolean>(false);
+  const [menuActive, setMenuActive] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const array = [];
+    const array : number[] = [];
     for (let i = 0; i < user.stars; i++) {
       array.push(i);
     }
@@ -32,13 +36,12 @@ function Frame({ user, setUser }) {
 
   async function exit() {
     const response = await logout();
-
     navigate("/");
+    return response
   }
 
   return (
     <>
-      {/* <div className='test'>Frame</div> */}
       <div className="top">
         <div className="nav">
           <div className="in-nav">
@@ -76,12 +79,9 @@ function Frame({ user, setUser }) {
       </div>
       {menuActive && (
         <div className="menu-open" onClick={() => setMenuActive(false)}>
-          {/* <img className='setting' src={settings} /> */}
           <img className="quit" src={quit} onClick={exit} />
         </div>
       )}
     </>
   );
 }
-
-export default Frame;

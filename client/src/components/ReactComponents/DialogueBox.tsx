@@ -1,26 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function DialogueBox({ message, setMessage }) {
-  function boxClose() {
+type Message = {
+  initial: string;
+  responseGood?: string;
+  responseBad?: string;
+  good?: string[] | undefined ;
+  bad?: string[] | undefined;
+};
+
+type DialogueBoxProps = {
+  message: Message;
+  setMessage: (Message: string) => void;
+};
+
+ export default function DialogueBox ({ message, setMessage } : DialogueBoxProps) : JSX.Element{
+  
+    function boxClose() {
     setMessage("");
   }
 
-  const [text, setText] = useState(message.initial);
-  const [currentText, setCurrentText] = useState("");
-  const [index, setIndex] = useState(0);
-  const [isClicked, setIsClicked] = useState(false);
-
-  const [instantText, setInstantText] = useState("");
+  const [text, setText] = useState<string>(message.initial);
+  const [currentText, setCurrentText] = useState<string>("");
+  const [index, setIndex] = useState<number>(0);
+  const [isClicked, setIsClicked] = useState<boolean>(false);
+  const [instantText, setInstantText] = useState<string>("");
 
   useEffect(() => {
     if (!message.responseGood || message.responseGood === undefined) {
       setInstantText(message.initial);
     }
   }, []);
-
-  console.log(instantText);
-
-  console.log(message.res);
 
   if (message.responseGood && message.responseBad) {
     useEffect(() => {
@@ -40,15 +49,16 @@ export default function DialogueBox({ message, setMessage }) {
   }
 
   const handleClickGood = () => {
-    setText(message.good[0]);
+    if (message.good) setText(message.good[0]);
     setIsClicked(!isClicked);
   };
   const handleClickBad = () => {
-    setText(message.bad[0]);
+   if(message.bad) setText(message.bad[0]);
     setIsClicked(!isClicked);
   };
 
   return (
+    <>
     <div className="message-box">
       <div className="close-message-box" onClick={boxClose}>
         {" "}
@@ -75,5 +85,7 @@ export default function DialogueBox({ message, setMessage }) {
         ""
       )}
     </div>
+    </>
   );
 }
+
